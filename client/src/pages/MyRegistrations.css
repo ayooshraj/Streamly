@@ -1,0 +1,61 @@
+.my-registrations {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.my-registrations h1 {
+  margin-bottom: 2rem;
+}
+
+.no-registrations {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.no-registrations p {
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.registrations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.registration-card {
+  transition: transform 0.2s;
+}
+
+.registration-card:hover {
+  transform: translateX(4px);
+}
+
+.reg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.reg-header h3 {
+  margin: 0;
+}
+
+.reg-date {
+  color: #374151;
+  margin: 0;
+}
+
+.reg-organizer {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 1rem;
+}
+
+.reg-actions {
+  display: flex;
+  gap: 0.5rem;
+}
