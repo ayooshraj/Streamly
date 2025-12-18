@@ -27,20 +27,25 @@ const EventDetails = () => {
     if (user) checkRegistration()
   }, [user, id])
 
-  const fetchEvent = async () => {
+const fetchEvent = async () => {
+  try {
+    const eventRes = await axios.get(`${API_URL}/api/events/${id}`)
+    setEvent(eventRes.data.event)
+    
+    // Try to fetch sessions, but don't fail if PostgreSQL is not connected
     try {
-      const [eventRes, sessionsRes] = await Promise.all([
-        axios.get(`${API_URL}/api/events/${id}`),
-        axios.get(`${API_URL}/api/sessions/event/${id}`)
-      ])
-      setEvent(eventRes.data.event)
+      const sessionsRes = await axios.get(`${API_URL}/api/sessions/event/${id}`)
       setSessions(sessionsRes.data.sessions)
-    } catch (err) {
-      setError('Event not found')
-    } finally {
-      setLoading(false)
+    } catch (sessionErr) {
+      console.log('Sessions not available:', sessionErr.message)
+      setSessions([])
     }
+  } catch (err) {
+    setError('Event not found')
+  } finally {
+    setLoading(false)
   }
+}
 
   const checkRegistration = async () => {
     try {

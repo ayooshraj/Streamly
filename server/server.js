@@ -21,8 +21,8 @@ const startServer = async () => {
     console.log('✅ MongoDB connected');
 
     // Connect to PostgreSQL
-    await connectPostgres();
-    console.log('✅ PostgreSQL connected');
+    // await connectPostgres();
+    // console.log('✅ PostgreSQL connected');
 
     // Start server
     server.listen(PORT, () => {

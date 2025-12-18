@@ -42,13 +42,17 @@ const upload = multer({
 
 // Public routes
 router.get('/', getEvents);
+
+// Protected routes (Organizer only) - MUST come before /:id
+router.get('/organizer/my-events', protect, isOrganizer, getMyEvents);
+
+// Public route with ID parameter - MUST come last
 router.get('/:id', validateObjectId, getEvent);
 
-// Protected routes (Organizer only)
+// Other protected routes
 router.post('/', protect, isOrganizer, upload.single('thumbnail'), createEvent);
 router.put('/:id', protect, isOrganizer, upload.single('thumbnail'), validateObjectId, updateEvent);
 router.delete('/:id', protect, isOrganizer, validateObjectId, deleteEvent);
-router.get('/organizer/my-events', protect, isOrganizer, getMyEvents);
 router.patch('/:id/stream-status', protect, isOrganizer, validateObjectId, updateStreamStatus);
 
 module.exports = router;
