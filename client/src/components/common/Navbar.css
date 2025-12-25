@@ -116,8 +116,56 @@
   .navbar {
     padding: 1rem;
   }
-  
+
+  .navbar-brand {
+    font-size: 1.25rem;
+  }
+
   .navbar-links {
-    gap: 1rem;
+    gap: 0.75rem;
+  }
+
+  .navbar-links a {
+    font-size: 0.9rem;
+  }
+
+  .navbar .btn-primary,
+  .navbar .btn-outline {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem;
+  }
+
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .navbar-links {
+    gap: 0.5rem;
+  }
+
+  .navbar-links a {
+    font-size: 0.8rem;
+    display: none;
+  }
+
+  .navbar-links a:first-child {
+    display: inline;
+  }
+
+  .navbar .btn-primary,
+  .navbar .btn-outline {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .navbar-user {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
   }
 }
