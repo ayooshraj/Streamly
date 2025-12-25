@@ -38,6 +38,15 @@ const Events = () => {
     })
   }
 
+  const getVideoThumbnail = (url) => {
+    if (!url) return null
+    const youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/live\/)([^&\n?#]+)/)
+    if (youtubeMatch) {
+      return `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`
+    }
+    return null
+  }
+
   if (loading) {
     return <div className="loading-container"><div className="spinner"></div></div>
   }
@@ -69,7 +78,9 @@ const Events = () => {
           {events.map(event => (
             <Link to={`/events/${event._id}`} key={event._id} className="event-card">
               <div className="event-thumbnail">
-                {event.thumbnail ? (
+                {getVideoThumbnail(event.streamUrl) ? (
+                  <img src={getVideoThumbnail(event.streamUrl)} alt={event.title} />
+                ) : event.thumbnail ? (
                   <img src={`${API_URL}${event.thumbnail}`} alt={event.title} />
                 ) : (
                   <div className="event-placeholder">📺</div>

@@ -102,27 +102,52 @@ const fetchEvent = async () => {
 
   const canJoinLive = isRegistered && event.streamStatus === 'live'
 
+  const getVideoThumbnail = (url) => {
+    if (!url) return null
+    const youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/live\/)([^&\n?#]+)/)
+    if (youtubeMatch) {
+      // Returns 16:9 aspect ratio thumbnail (maxresdefault.jpg is 1280x720)
+      return `https://img.youtube.com/vi/${youtubeMatch[1]}/maxresdefault.jpg`
+    }
+    return null
+  }
+
   return (
     <div className="event-details">
-      <div className="event-main">
+      <div className="event-left">
         <div className="event-header">
           <span className="event-category">{event.category}</span>
           <span className={`event-status status-${event.streamStatus}`}>
             {event.streamStatus}
           </span>
         </div>
-        
+
         <h1>{event.title}</h1>
         <p className="event-organizer">Organized by {event.organizer?.name}</p>
-        
-        <div className="event-dates">
-          <p><strong>Starts:</strong> {formatDate(event.startDate)}</p>
-          <p><strong>Ends:</strong> {formatDate(event.endDate)}</p>
-        </div>
-        
+
+        {event.streamUrl && (
+          <div className="event-thumbnail">
+            {getVideoThumbnail(event.streamUrl) ? (
+              <img src={getVideoThumbnail(event.streamUrl)} alt={event.title} />
+            ) : (
+              <div className="thumbnail-placeholder">
+                <span>📺</span>
+                <p>Stream Preview</p>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div className="event-right">
         <div className="event-description">
           <h3>About this event</h3>
           <p>{event.description}</p>
+        </div>
+
+        <div className="event-dates">
+          <p><strong>Starts:</strong> {formatDate(event.startDate)}</p>
+          <p><strong>Ends:</strong> {formatDate(event.endDate)}</p>
         </div>
 
         {sessions.length > 0 && (
@@ -145,12 +170,10 @@ const fetchEvent = async () => {
             ))}
           </div>
         )}
-      </div>
 
-      <div className="event-sidebar">
         <div className="registration-card">
           <p className="attendee-count">{event.registrationCount || 0} registered</p>
-          
+
           {canJoinLive ? (
             <Link to={`/live/${id}`} className="btn btn-primary btn-block">
               🔴 Join Live Stream
@@ -160,7 +183,7 @@ const fetchEvent = async () => {
               ✓ Registered
             </button>
           ) : (
-            <button 
+            <button
               className="btn btn-primary btn-block"
               onClick={handleRegister}
               disabled={registering}
@@ -168,7 +191,7 @@ const fetchEvent = async () => {
               {registering ? 'Registering...' : 'Register for Event'}
             </button>
           )}
-          
+
           {!isAuthenticated && (
             <p className="login-prompt">
               <Link to="/login">Login</Link> to register

@@ -1,119 +1,338 @@
+/* ===== EVENTS PAGE ===== */
 .events-page {
-  max-width: 1000px;
-  margin: 0 auto;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f0f 100%);
+  padding: 2rem;
+  position: relative;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+.events-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== HEADER ===== */
 .events-header {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.events-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFFFFF 0%, rgba(255,255,255,0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .category-filter {
-  width: auto;
-  min-width: 150px;
+  padding: 0.875rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+  color: #FFFFFF;
+  font-size: 1rem;
+  min-width: 200px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='rgba(255,255,255,0.6)' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 3rem;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+.category-filter:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.category-filter option {
+  background: #1a1a2e;
+  color: #FFFFFF;
+}
+
+/* ===== EVENTS GRID ===== */
 .events-grid {
+  max-width: 100%;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+/* ===== EVENT CARD ===== */
 .event-card {
-  background: white;
-  border-radius: 8px;
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
+  display: block;
+  position: relative;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.event-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .event-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
 }
 
+.event-card:hover::before {
+  opacity: 1;
+}
+
+/* ===== EVENT THUMBNAIL ===== */
 .event-thumbnail {
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  height: 160px;
-  background: #e5e7eb;
+  overflow: hidden;
+  opacity: 0.5;
+  visibility: visible !important;
 }
 
 .event-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0.5;
+  filter: brightness(0.6);
 }
 
 .event-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 3rem;
+  font-size: 4rem;
+  opacity: 0.5;
 }
 
 .event-status {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
+  backdrop-filter: blur(10px);
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .status-scheduled {
-  background: #fef3c7;
-  color: #92400e;
+  background: rgba(139, 92, 246, 0.9);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .status-live {
-  background: #fee2e2;
-  color: #dc2626;
+  background: rgba(239, 68, 68, 0.9);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: livePulse 2s ease-in-out infinite;
 }
 
 .status-ended {
-  background: #e5e7eb;
-  color: #6b7280;
+  background: rgba(107, 114, 128, 0.9);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+@keyframes livePulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.9);
+  }
+}
+
+/* ===== EVENT INFO ===== */
 .event-info {
-  padding: 1rem;
+  padding: 1.5rem;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .event-category {
-  font-size: 0.75rem;
-  color: #6366f1;
-  text-transform: uppercase;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
   font-weight: 600;
+  color: #a78bfa;
+  text-transform: capitalize;
+  margin-bottom: 0.75rem;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .event-info h3 {
-  margin: 0.5rem 0;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .event-date {
-  color: #6b7280;
-  font-size: 0.875rem;
-  margin: 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.25rem;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .event-organizer {
-  color: #9ca3af;
-  font-size: 0.875rem;
-  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
+/* ===== NO EVENTS ===== */
 .no-events {
   text-align: center;
-  color: #6b7280;
-  padding: 2rem;
+  padding: 4rem 2rem;
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ===== LOADING SPINNER ===== */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f0f 100%);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(99, 102, 241, 0.2);
+  border-top-color: #6366f1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== ALERT ===== */
+.alert {
+  max-width: 1400px;
+  margin: 0 auto 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .events-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .events-header h1 {
+    font-size: 2rem;
+  }
+
+  .category-filter {
+    width: 100%;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ===== CRITICAL VISIBILITY OVERRIDES ===== */
+.events-page {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.events-page .events-header,
+.events-page .events-grid,
+.events-page .event-card,
+.events-page .event-info,
+.events-page h1,
+.events-page h3,
+.events-page p,
+.events-page select {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
